@@ -1,0 +1,84 @@
+.title-transaction{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 22px;
+    color: #000000;
+}
+.status-payment-pending{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: #F7941E;
+}
+.status-payment-approve{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: #0ACF83;
+}
+.status-payment-cancel{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: #FF0742;
+}
+.header-transaction{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 22px;
+    color: #000000;
+    padding: 40px;
+}
+.body-transaction{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+}
+.approve-admin{
+    width: 100px;
+    height: 35px;
+    background: #0ACF83;
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+.isi-approve-admin{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+.cancel-admin{
+    width: 100px;
+    height: 35px; 
+    background: #FF0742;
+    border-radius: 5px;
+    padding: 5px 20px;
+    cursor: pointer;
+}
+.isi-cancel-admin{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+}

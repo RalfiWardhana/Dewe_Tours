@@ -1,0 +1,274 @@
+.square-profile{
+    width: 785px;
+    height: 453px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(5, 5, 5, 0.08);
+    border-radius: 8px;
+    margin: 50px;
+}
+.center-profile{
+    display: flex;
+    justify-content: center;
+}
+.zyan{
+    width: 280px;
+    height: 350px;
+    margin: 20px 40px;
+}
+.personal-info{
+    
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 24px;
+    color: #050505;
+    margin: 30px 30px 50px;
+}
+.flex-profile{
+    display: flex;
+    margin-bottom: 20px;
+}
+.fill-profile{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 20px;
+    color: #050505;
+    margin-bottom: 5px;
+}
+.description-profile{
+    font-family: Google Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: #8A8C90;
+    margin:0px;
+}
+.logo-profile{
+    width:30px; 
+    height:30px;
+    margin-left: 40px; 
+    margin-right: 20px;
+}
+.button-changeprofile{
+    width: 280px;
+    height: 50px;
+    background: #FFAF00;
+    border-radius: 5px;
+}
+.history-profile{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 24px;
+    color: #050505;
+    margin-left: 60px;
+    position: relative;
+    top: 30px;
+}
+
+.square-payment{
+    width: 1035px;
+    height: 480px;
+    background: #FFFFFF;
+    border: 2px solid #B7B7B7;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin: 60px;
+}
+.flex-between-payment{
+    display: flex;
+    justify-content: space-between;
+}
+.booking-payment{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 49px;
+    margin: 20px 40px 0px;
+    color: #000000;
+}
+.dewe-payment{
+    margin: 20px 40px;
+    height: 50px;
+    width: 150px;
+}
+.flex-end-payment{
+    display: flex;
+    justify-content: flex-end;
+    margin: 0px 40px;
+    padding: 0px;
+}
+.date-payment{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+    color: #878787;
+}
+.flex-payment{
+    display: flex;
+}
+.bukti-payment{
+    margin: 0px 40px 20px;
+    width: 150px;
+    height: 150px;
+}
+.desc-payment{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 33px;
+    color: #000000;
+    margin-left: 40px;
+}
+.trip-payment{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+    color: #000000;
+    position: relative;
+    left: 350px;
+    margin-right: 80px;
+    z-index: 10;
+}
+.desc-fill-payment{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    color: #959595;
+    margin-left: 40px;
+    position: relative;
+    z-index: 1;
+}
+.trip-fill-payment{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    color: #959595;
+    position: relative;
+    left: 365px;
+    margin-right: 65px;
+    z-index: 10;
+}
+.desc-payment-two{
+    margin-left: 40px;
+    margin-right: 375px;
+}
+.trip-payment-two{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+    color: #000000;
+    position: relative;
+    left: 15px;
+    margin-right: 45px;
+}
+.flex-payment-marginTop{
+    display: flex;
+    margin-top: 30px;
+}
+.desc-fill-payment-two{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    color: #959595;
+    margin-left: 40px;
+}
+.trip-fill-payment-two{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    color: #959595;
+    position: relative;
+    left: 355px;
+    margin-right: 75px;
+}
+.waiting-payment{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;  
+    text-align: center;
+    color: #EC7A7A;
+}
+.approve-payment-button{
+    background: linear-gradient(180deg, #3CF71E 0%, #0BDC5F 100%);
+    opacity: 0.8;
+    border-radius: 2px;
+    padding: 5px;
+}
+.approve-payment{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: green;
+}
+.table-payment{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 25px;
+    color: #B1B1B1;
+}
+.qty{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 25px;
+    color: #000000;
+}
+.price-payment{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 25px;
+    color: #FF0000;
+}
+.payment-success{
+    width: 213px;
+    height: 50px;
+    background: #FFAF00;
+    border-radius: 5px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}

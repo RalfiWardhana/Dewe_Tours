@@ -1,0 +1,44 @@
+[
+    {
+        "id" :1,
+        "image" : "australia.png",
+        "title" : "6D/4N Fun Tasiie Vocation..",
+        "price" : "IDR 12,398,000",
+        "location" : "Australia"
+    },
+    {
+        "id" :2,
+        "image" : "korsel.png",
+        "title" : "6D/4N Exciting Summer In..",
+        "price" : "IDR 10,288,000",
+        "location" : "South Korea"
+    },
+    {
+        "id" :3,
+        "image" : "japan.png",
+        "title" : "6D/4N Wonderfull Autumn..",
+        "price" : "IDR 28,999,000",
+        "location" : "Japan"
+    },
+    {
+        "id" :4,
+        "image" : "indonesia.png",
+        "title" : "6D/4N Overland Jakarta B..",
+        "price" : "IDR 3,188,000",
+        "location" : "Indonesia"
+    },
+    {
+        "id" :5,
+        "image" : "bali.png",
+        "title" : "6D/4N Labuan Bajo Delight",
+        "price" : "IDR 10,488,000",
+        "location" : "Indonesia"
+    },
+    { 
+        "id" :6,
+        "image" : "tokyo.png",
+        "title" : "6D/4N Magic tokyo fun",
+        "price" : "IDR 11,188,000",
+        "location" : "Japan"
+    }
+]

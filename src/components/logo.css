@@ -1,0 +1,27 @@
+.logo{ 
+    position: relative;
+    top:20px;
+    left: 5%;
+    font-family: Summer Vibes;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 68px;
+    color: #FFFFFF;
+    width: 180px;
+    height: 60px;
+ }
+ .elips{  
+    position: relative;
+    top:40px;
+    left: -80px;
+    width: 193px;
+    height: 11px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #FFD14B 0%, #FFAF00 100%);
+    transform: matrix(1, 0, 0, -1, 0, 0);
+ }
+ .summer{
+   position: relative;
+   top:10px;
+   left: -200px;
+ }

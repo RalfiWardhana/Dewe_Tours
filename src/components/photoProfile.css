@@ -1,0 +1,28 @@
+.photo-logo-top{
+    width: 45px;
+    height: 45px;
+}
+.dropdown-profile{
+    margin-left: 1150px;
+    margin-top: -35px;
+}
+.flex-dropdown{
+    display: flex;
+}
+.logo-dropdown{
+    margin-left: 25px;
+}
+.desc-dropdown{
+    font-family: Product Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.dropdown-toggle{
+    background-color: #54B2B2;
+    margin-top: -10px;
+}

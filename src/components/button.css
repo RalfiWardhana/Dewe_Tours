@@ -1,0 +1,95 @@
+.login{
+    position: relative;
+    width: 100px;
+    height: 30px;
+    left: 870px;
+    top: 30px;
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+.register{
+    position: relative;
+    width: 100px;
+    height: 37px;
+    left: 890px;
+    top: 30px;
+    color: #FFFFFF;
+    background: #FFAF00;
+    border-radius: 5px;
+}
+.modal-login{
+    height: 500px;
+}
+.login-title-center{
+    display: flex;
+    justify-content: center;
+}
+.login-title{
+    font-family: Product Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 44px;
+    color: #000000;
+    position: relative;
+    top: 51px;
+}
+.login-email{   
+    width: 60px;
+    height: 29px;
+    margin-left: 42px;
+    margin-top: 70px;
+    font-family: Product Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+}
+.login-email-input{
+    width: 410px;
+    height: 50px;
+    margin-top: 5px;
+    background: rgba(210, 210, 210, 0.25);
+    border: 2px solid rgba(210, 210, 210, 0.25);
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+.login-password{   
+    width: 60px;
+    height: 29px;
+    margin-left: 42px;
+    margin-top: 20px;
+    font-family: Product Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+}
+.login-password-input{
+    width: 410px;
+    height: 50px;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    background: rgba(210, 210, 210, 0.25);
+    border: 2px solid rgba(210, 210, 210, 0.25);
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+.login-buttons{
+    width: 350px;
+    height: 50px;
+    margin-bottom: 20px;
+    background: #FFAF00;
+    border-radius: 5px;
+}
+.login-register{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 25px;
+    color: #B1B1B1;
+}

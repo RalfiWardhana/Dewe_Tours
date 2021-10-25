@@ -1,0 +1,79 @@
+.title-home-addTrip-trip{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 22px;
+    color: #000000;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.label-addTrip{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 33px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+.input-addTrip{
+    width: 1100px;
+    height: 49px;
+    background: rgba(196, 196, 196, 0.5);
+    border: 2px solid #B1B1B1;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+.input-addTrip-description{
+    width: 1100px;
+    height: 117px;
+    background: rgba(196, 196, 196, 0.5);
+    border: 2px solid #B1B1B1;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+.day-night{
+    width: 228px;
+    height: 49px;
+    background: rgba(196, 196, 196, 0.5);
+    border: 2px solid #B1B1B1;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-right: 30px;
+    margin-bottom: 40px;
+}
+.d-n{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 33px;
+    color: #000000;
+    margin-right: 30px;
+}
+.display-center{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 70px;
+}
+.button-trp{
+    width: 250px;
+    height: 40px;
+    background: #FFAF00;
+    border-radius: 5px;
+}
+.isi-button-trp{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 5px;
+}

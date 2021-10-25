@@ -1,0 +1,57 @@
+[
+    {
+        "imageOne" : "keongmas.png",
+        "imageTwo" : "aus1.png",
+        "imageThree" :"aus2.png",
+        "imageFour" : "aus3.png",
+        "title" : "6D/4N Fun Tasiie Vocation",
+        "price" : "12398000",
+        "location" : "Australia"
+    },
+    {
+        "imageOne" : "korsel.png",
+        "imageTwo" : "aus1.png",
+        "imageThree" :"aus2.png",
+        "imageFour" : "aus3.png",
+        "title" : "6D/4N Exiciting Summer",
+        "price" : "10288000",
+        "location" : "South Korea"
+    },
+    {
+        "imageOne" : "japan.png",
+        "imageTwo" : "aus1.png",
+        "imageThree" :"aus2.png",
+        "imageFour" : "aus3.png",
+        "title" : "6D/4N Wonderfull Autumn",
+        "price" : "28999000",
+        "location" : "Japan"
+    },
+    {
+        "imageOne" : "indonesia.png",
+        "imageTwo" : "aus1.png",
+        "imageThree" :"aus2.png",
+        "imageFour" : "aus3.png",
+        "title" : "6D/4N OverLand Jakarta Holliday",
+        "price" : "3188000",
+        "location" : "Indonesia"
+    },
+    {
+        "imageOne" : "Bali.png",
+        "imageTwo" : "aus1.png",
+        "imageThree" :"aus2.png",
+        "imageFour" : "aus3.png",
+        "title" : "6D/4N Labuan Bejo Delight",
+        "price" : "10488000",
+        "location" : "Bali"
+    },
+    {
+        "imageOne" : "tokyo.png",
+        "imageTwo" : "aus1.png",
+        "imageThree" :"aus2.png",
+        "imageFour" : "aus3.png",
+        "title" : "6D/4N Magic Tokyo Fun",
+        "price" : "11188000",
+        "location" : "Japan"
+    }
+    
+]

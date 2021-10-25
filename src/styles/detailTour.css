@@ -1,0 +1,133 @@
+.body-detail{
+    background-color : #E5E5E5;
+}
+
+.title{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 48px;
+    line-height: 66px;
+    /* identical to box height */
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+}
+.location-detail{
+    
+    margin-top: -20px;
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 33px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #A8A8A8;
+}
+.info-trip{
+    margin-top: 20px;
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+}
+.details{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 13px;
+    line-height: 18px;
+    margin-bottom: 10px;
+
+    display: flex;
+    align-items: center;
+
+    color: #A8A8A8;
+
+}
+.details-list{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 25px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
+}
+.flex-detail{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.price-detail{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 33px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #FFAF00;
+}
+.person-detail{
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 33px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
+}
+.flex-border{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-top : 2px solid rgba(183, 183, 183, 0.5);
+    border-bottom: 2px solid rgba(183, 183, 183, 0.5);
+}
+.flex-end{
+    display: flex;
+    justify-content: end;
+}
+.button-book{
+    width: 213px;
+    height: 50px;
+    background: #FFAF00;
+    border-radius: 5px;
+    color: white;
+    margin-bottom: 20px;
+}
+.jcc{
+    display: flex;
+    justify-content: center;
+}
