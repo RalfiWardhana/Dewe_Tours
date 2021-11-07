@@ -25,10 +25,10 @@ const LogoProfile = () =>{
         return (
             <>
                 <Dropdown isOpen={dropdownOpen} toggle={toggle} className="dropdown-profile">
-                        <DropdownToggle caret className="dropdown-toggle">
-                        <img className="photo-logo-top" src ="/elips.png"></img>
+                        <DropdownToggle caret className="dropdown-toggle"> 
                         </DropdownToggle>
-                        <DropdownMenu>
+                        <img className="photo-logo-top" src ="/elips.png" onClick={toggle}></img>
+                        <DropdownMenu style={{marginTop:"20px"}}>
                             <div className="flex-dropdown">
                                 <div><img src="/dropProfile.PNG" className="logo-dropdown"></img></div>
                                 <div className="desc-dropdown"><Link to="/profiles">Profile</Link></div>
@@ -50,11 +50,11 @@ const LogoProfile = () =>{
     else if(isLogin.isadmin == true){
         return (
             <>
-                <Dropdown isOpen={dropdownOpen} toggle={toggle} className="dropdown-profile">
-                        <DropdownToggle caret className="dropdown-toggle">
-                        <img className="photo-logo-top" src ="/iconAdmin.png"></img>
-                        </DropdownToggle>
-                        <DropdownMenu>
+                <Dropdown isOpen={dropdownOpen} toggle={toggle} className="dropdown-profile"> 
+                        <DropdownToggle caret className="dropdown-toggle"> 
+                        </DropdownToggle>   
+                        <img className="photo-logo-top-admin" src ="/iconAdmin.png" onClick={toggle}></img>
+                        <DropdownMenu style={{marginTop:"20px"}}>
                             <div className="flex-dropdown">
                                 <div><img src="/tripAdmin.PNG" className="logo-dropdown"></img></div>
                                 <div className="desc-dropdown"><Link to="/trip">Trip</Link></div>

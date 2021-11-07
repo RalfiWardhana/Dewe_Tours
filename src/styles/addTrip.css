@@ -1,5 +1,5 @@
 .title-home-addTrip-trip{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 36px;
@@ -9,7 +9,7 @@
     margin-bottom: 50px;
 }
 .label-addTrip{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 24px;
@@ -48,7 +48,7 @@
     margin-bottom: 40px;
 }
 .d-n{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 24px;
@@ -68,7 +68,7 @@
     border-radius: 5px;
 }
 .isi-button-trp{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 18px;

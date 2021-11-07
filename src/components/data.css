@@ -3,11 +3,12 @@
     background-color: #E5E5E5;
     margin-top: -260px;
     text-align: center;
+    padding-top: 370px;
 }
 .fill{
-    position: absolute;
-    margin-top:370px;
-    margin-left: 0px;
+    display: flex;
+    justify-content: center;
+    margin-top:30px;
     text-align: center;
 }
 .title-home{
@@ -19,7 +20,7 @@
     color: #000000;
     margin-bottom: 50px;
 }
-.flex{
+.flex-evenly{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -30,12 +31,19 @@
     background: #FFFFFF;
     border-radius: 5px;
     margin-bottom: 60px;
+    margin-right: 20px;
+    margin-left: 20px;
 }
 .flex-between{
   display: flex;
   justify-content: space-around;  
-  margin-top: 10px;
+  margin-top: -30px;
 }
+.flex-between-harga{
+    display: flex;
+    justify-content: space-around;  
+    margin-top: 20px;
+  }
 .data-title{
     font-family: Avenir;
     font-style: normal;
@@ -77,7 +85,7 @@
     margin-bottom: 40px;
 }
 .title-home-addTrip{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 36px;
@@ -91,7 +99,7 @@
     height: 40px;
 }
 .isi-button-addTrip{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 18px;

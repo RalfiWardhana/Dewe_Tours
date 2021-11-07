@@ -3,22 +3,22 @@
 }
 
 .title{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 48px;
     line-height: 66px;
     /* identical to box height */
     margin-top: 30px;
     display: flex;
     align-items: center;
-
+    margin-bottom: 20px;
     color: #000000;
 }
 .location-detail{
     
     margin-top: -20px;
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 24px;
@@ -33,7 +33,7 @@
 }
 .info-trip{
     margin-top: 20px;
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 18px;
@@ -44,7 +44,7 @@
     color: #000000;
 }
 .details{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 13px;
@@ -58,7 +58,7 @@
 
 }
 .details-list{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 12px;
@@ -78,9 +78,9 @@
     margin-bottom: 20px;
 }
 .price-detail{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 24px;
     line-height: 33px;
     /* identical to box height */
@@ -92,9 +92,9 @@
     color: #FFAF00;
 }
 .person-detail{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 24px;
     line-height: 33px;
     /* identical to box height */

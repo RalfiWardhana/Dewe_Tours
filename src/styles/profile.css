@@ -17,9 +17,9 @@
 }
 .personal-info{
     
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 36px;
     line-height: 24px;
     color: #050505;
@@ -32,7 +32,7 @@
 .fill-profile{
     font-family: Avenir;
     font-style: normal;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 14px;
     line-height: 20px;
     color: #050505;
@@ -60,9 +60,9 @@
     border-radius: 5px;
 }
 .history-profile{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 36px;
     line-height: 24px;
     color: #050505;
@@ -85,9 +85,9 @@
     justify-content: space-between;
 }
 .booking-payment{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 36px;
     line-height: 49px;
     margin: 20px 40px 0px;
@@ -105,9 +105,9 @@
     padding: 0px;
 }
 .date-payment{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 18px;
     line-height: 25px;
     /* identical to box height */
@@ -122,29 +122,29 @@
     height: 150px;
 }
 .desc-payment{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 24px;
     line-height: 33px;
     color: #000000;
     margin-left: 40px;
 }
 .trip-payment{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 18px;
     line-height: 25px;
     /* identical to box height */
     color: #000000;
     position: relative;
     left: 350px;
-    margin-right: 80px;
+    margin-right: 83px;
     z-index: 10;
 }
 .desc-fill-payment{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -157,7 +157,7 @@
     z-index: 1;
 }
 .trip-fill-payment{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -175,23 +175,35 @@
     margin-right: 375px;
 }
 .trip-payment-two{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 18px;
     line-height: 25px;
     /* identical to box height */
     color: #000000;
     position: relative;
     left: 15px;
-    margin-right: 45px;
+    margin-right: 35px;
+}
+.trip-payment-transportation{
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+    color: #000000;
+    position: relative;
+    left: 15px;
+    margin-right: 75px;
 }
 .flex-payment-marginTop{
     display: flex;
     margin-top: 30px;
 }
 .desc-fill-payment-two{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -202,7 +214,7 @@
     margin-left: 40px;
 }
 .trip-fill-payment-two{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -215,9 +227,9 @@
     margin-right: 75px;
 }
 .waiting-payment{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 900;
     font-size: 12px;
     line-height: 16px;  
     text-align: center;
@@ -229,10 +241,22 @@
     border-radius: 2px;
     padding: 5px;
 }
+.waiting-approve-buttonn{
+    background-color: #eccc86;
+    opacity: 0.8;
+    border-radius: 2px;
+    padding: 5px;
+}
+.cancel-payment-button{
+    background-color: #FF0742;
+    opacity: 0.8;
+    border-radius: 2px;
+    padding: 5px;
+}
 .approve-payment{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 900;
     font-size: 12px;
     line-height: 16px;
     display: flex;
@@ -240,8 +264,19 @@
     text-align: center;
     color: green;
 }
+.waiting-approve{
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #f58d0e;
+}
 .table-payment{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -249,7 +284,7 @@
     color: #B1B1B1;
 }
 .qty{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 18px;
@@ -257,7 +292,7 @@
     color: #000000;
 }
 .price-payment{
-    font-family: Avenir;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 18px;

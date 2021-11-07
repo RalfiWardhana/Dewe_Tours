@@ -1,26 +1,66 @@
-import React, { useContext } from 'react';
+import React, { useContext,useEffect,useState } from 'react';
 import Navbar from "../components/navbar";
 import "../styles/profile.css"
 import { Container, Row, Col } from 'reactstrap';
 import Footer from "../components/footer";
 import { Table } from 'reactstrap';
 import Context, { CartContext } from '../cartContext';
+import { API,setAuthToken } from "../config/api";
+
 
 function Profile() {
     const {isLogin, setLogin} = useContext(CartContext);
-    let user = JSON.parse(localStorage.getItem("users"));
-    let arrayProfile = []
-    user.forEach((usr)=>{
-        if(usr.email == isLogin.email){
-            arrayProfile.push(usr)
+    const[histories,setHistories] =useState([])
+    const[biodata,setBiodata] =useState([])
+    console.log(isLogin);
+    const arrayHistory = []
+    const getHistory = async() => {
+        try {
+            const token = localStorage.getItem("token");
+            setAuthToken(token)
+            const biodata = await API.get("/users")
+            const response = await API.get("/transaction")
+            setBiodata(biodata.data.data)      
+            setHistories(response.data.data)    
+        } catch (error) {
+            console.log(error)
         }
-    })
-    console.log(arrayProfile[0].trip)
+    }
+    useEffect(()=>{
+        getHistory()
+    },[])
+    console.log(biodata)
+    console.log(histories)
+
+    const button = (aidi) =>{
+        if(aidi == "Approve"){
+            return "approve-payment-button"
+        }
+        else if(aidi == "Waiting Approve"){
+            return "waiting-approve-buttonn"
+        }
+        else if(aidi == "Cancel"){
+            return "cancel-payment-button"
+        }
+    }
+    const color = (aidi) =>{
+        if(aidi == "Approve"){
+            return "approve-payment"
+        }
+        else if(aidi == "Waiting Approve"){
+            return "waiting-approve"
+        }
+        else if(aidi == "Cancel"){
+            return "waiting-payment"
+        }
+    }
    
     return (
       <div style={{ backgroundColor: "#E5E5E5"}}>  
         <Navbar/>
+        <div>
         <Container className="center-profile">
+        {biodata.filter((user)=>user.email == isLogin.email).map((bio)=>(
             <Row>
                 <Col>
                     <div className="square-profile">
@@ -30,28 +70,28 @@ function Profile() {
                                 <div className="flex-profile">
                                     <img src="logoProfile.png" className="logo-profile"></img>
                                     <div>
-                                        <p className="fill-profile">{arrayProfile[0].username}</p>
+                                        <p className="fill-profile">{bio.fullname}</p>
                                         <p className="description-profile">fullname</p>
                                     </div>
                                 </div> 
                                 <div className="flex-profile">
                                     <img src="logoPesan.png" className="logo-profile"></img>
                                     <div>
-                                        <p className="fill-profile">{arrayProfile[0].email}</p>
+                                        <p className="fill-profile">{bio.email}</p>
                                         <p className="description-profile">email</p>
                                     </div>
                                 </div> 
                                 <div className="flex-profile">
                                     <img src="logoPhone.png" className="logo-profile"></img>
                                     <div>
-                                        <p className="fill-profile">{arrayProfile[0].phone}</p>
+                                        <p className="fill-profile">{bio.phone}</p>
                                         <p className="description-profile">Mobile Phone</p>
                                     </div>
                                 </div> 
                                 <div className="flex-profile">
                                     <img src="logoLocation.png" className="logo-profile"></img>
                                     <div>
-                                        <p className="fill-profile">Komplek KIG E3/18, Bekasi</p>
+                                        <p className="fill-profile">{bio.address}</p>
                                         <p className="description-profile">Address</p>
                                     </div>
                                 </div> 
@@ -64,10 +104,11 @@ function Profile() {
                     </div>
                 </Col>
             </Row>
+          ))}
         </Container>
         <Container>
             <p className="history-profile">History</p>
-            {arrayProfile[0].trip.map((list)=>(
+            {histories.filter((user)=>user.user.email == isLogin.email).map((htr)=>(
                 <Row>
                     <Col>
                         <div className="square-payment">
@@ -81,10 +122,10 @@ function Profile() {
                             <div className="flex-between-payment">
                                 <div>
                                     <div className="flex-payment">
-                                        <div className="desc-payment">{list.title}</div>
+                                        <div className="desc-payment">{htr.trip.title}</div>
                                     </div>
                                     <div className="flex-payment">
-                                         <div className="desc-fill-payment">{list.location}</div>
+                                         <div className="desc-fill-payment">france</div>
                                     </div>
                                     <div className="flex-payment">
                                         <div className="trip-payment"></div>
@@ -93,8 +134,8 @@ function Profile() {
                                     </div>
                                     <div className="flex-payment">
                                         <div className="trip-fill-payment"></div>
-                                        <div className="trip-fill-payment">26 August 2020</div>
-                                        <div className="trip-fill-payment">6 Day 4 Night</div>
+                                        <div className="trip-fill-payment">{htr.trip.dateTrip}</div>
+                                        <div className="trip-fill-payment">{htr.trip.day} Day {htr.trip.night} Night</div>
                                     </div>
                                     <div className="flex-payment-marginTop">
                                         <div className="desc-payment-two"></div>
@@ -103,11 +144,11 @@ function Profile() {
                                     </div>
                                     <div className="flex-payment">
                                     <div className="trip-fill-payment-two"></div>
-                                        <div className="trip-fill-payment-two">Hotels 4 Night</div>
-                                        <div className="trip-fill-payment-two">Qatar Airways</div>
+                                        <div className="trip-fill-payment-two">{htr.trip.accomodation}</div>
+                                        <div className="trip-fill-payment-two">{htr.trip.transportation}</div>
                                     </div>
                                     <div className="flex-payment">
-                                        <div className="desc-fill-payment-two"><div className="approve-payment-button"><span className="approve-payment">Approve</span></div></div>
+                                        <div className="desc-fill-payment-two"><div className={button(htr.status)}><span className={color(htr.status)}>{htr.status}</span></div></div>
                                     </div>
                                 </div>
                                 <div><img src="barcode.PNG" className="bukti-payment"></img></div>
@@ -126,11 +167,11 @@ function Profile() {
                                 <tbody>
                                     <tr>
                                     <th scope="row" className="table-payment">1</th>
-                                    <td className="table-payment">{arrayProfile[0].username}</td>
+                                    <td className="table-payment">{htr.user.fullname}</td>
                                     <td className="table-payment">Male</td>
-                                    <td className="table-payment">{arrayProfile[0].phone}</td>
+                                    <td className="table-payment">{htr.user.phone}</td>
                                     <td className="qty">Qty</td>
-                                    <td className="qty">{list.qty}</td>
+                                    <td className="qty">{htr.counterQty}</td>
                                     </tr>
                                 </tbody>
                                 <tbody>
@@ -140,16 +181,16 @@ function Profile() {
                                     <td></td>
                                     <td></td>
                                     <td className="qty">Total</td>
-                                    <td className="price-payment">: IDR {list.price} </td>
+                                    <td className="price-payment">: IDR {htr.total}</td>
                                     </tr>
                                 </tbody>
                             </Table>
                         </div>
                     </Col>
                 </Row> 
-            ))}
-            
+          ))} 
         </Container>
+        </div> 
         <Footer/>
       </div>
     )

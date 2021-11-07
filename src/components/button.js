@@ -4,48 +4,11 @@ import "./button.css";
 import { useHistory } from 'react-router';
 import PhotoProfile from "./photoProfile"
 import Context, { CartContext } from '../cartContext';
-
+import{API} from "../config/api"
 
 
 const ModalExamples = () =>{
       const {isLogin, setLogin} = useContext(CartContext);
-             
-      function logins(){
-            
-            
-            let user = JSON.parse(localStorage.getItem("users"))
-            if(user == undefined){
-                setModal(!modal);  
-                history.push("/") 
-            }
-            else{
-                console.log(user)
-                const email = document.getElementById("emailLogin").value;
-                const password =document.getElementById("passwordLogin").value;
-            
-                user.forEach((usr)=>{
-                    if((email == usr.email) && (password == usr.password)){
-                        if((email == "admin@gmail.com") && (password == "123")){
-                            setLogin({islog:true,email:email,password:password,isadmin:true});
-                            console.log(isLogin)
-                            history.push("/transactions")
-                        }
-                        else{
-                            setLogin({islog:true,email:email,password:password,isadmin:false});
-                            console.log(isLogin)
-                            history.push("/profiles")
-                        }                       
-                    }
-                    else{
-                    setModal(!modal);  
-                    history.push("/") 
-                    }
-                
-                })
-            }
-                
-      }
-    
       const [modal, setModal] = useState(false);
     
       const toggle = () => setModal(!modal);
@@ -60,34 +23,78 @@ const ModalExamples = () =>{
           history.push("/profiles")
       }
 
-      const push = () => {
-        let users;
-        if(localStorage.getItem("users") == null){
-            users = [];
-        }
-        else{
-            users = JSON.parse(localStorage.getItem("users"));
-        }  
-        if((document.getElementById("email").value == "")&&(document.getElementById("password").value=="")){
-            setModals(!modals);
-            history.push("/")
-        }
-        else{
-        users.push({
-            id:users.length,
-            username : document.getElementById("username").value,
-            email:document.getElementById("email").value,
-            password:document.getElementById("password").value,
-            phone:document.getElementById("phone").value,
-            trip:[],
-        })
+      const[form,setForm]= useState({
+        fullname:"",
+        email:"",
+        password:"",
+        phone:"",
+        address:"",
+        status:""
+       })
+      const handleChange = (e) => {
+        setForm({...form,[e.target.name]:e.target.value})
+      }
 
-            localStorage.setItem("users",JSON.stringify(users));        
-            setModals(!modals)
-            history.push("/")
+      const[formLogin, setFromLogin] = useState({
+          emailLogin:"",
+          passwordLogin:""
+      })
+ 
+      const handleChangeLogin = (e) => {
+          setFromLogin({...formLogin,[e.target.name]:e.target.value})
+      }    
+             
+      const logins = async () =>{
+        try{
+            const config ={
+                headers:{
+                    "Content-Type" : "application/json"
+                }
+            }
+            const body = JSON.stringify(formLogin)
+            console.log(body)
+            const response = await API.post("/login",body,config)
+            console.log(response)
+            if(response.data.status == "success"){
+                if(response.data.data.status == "user"){
+                    setLogin({islog:true,email:formLogin.emailLogin,isadmin:false});
+                    localStorage.setItem("token",response.data.data.token)
+                    history.push("/")
+                }
+                else if(response.data.data.status == "admin"){
+                    setLogin({islog:true,email:formLogin.emailLogin,isadmin:true});
+                    localStorage.setItem("token",response.data.data.token)
+                    history.push("/transactions")
+                }
+               
+            }
+        }catch(error){
+            console.log(error)
+            }
+        
+      }
+
+      const push = async() => {
+        try{
+            const config ={
+                headers:{
+                    "Content-Type" : "application/json"
+                }
+            }
+            const body = JSON.stringify(form)
+            console.log(config)
+            const response = await API.post("/register",body,config)
+            console.log(response)
+            if(response.data.status == "success"){
+                history.push("/")
+                setModals(!modals)
+            }
+        }catch(error){
+            console.log(error)
+            }
+        
         }   
-    }
-
+    
 
     if(isLogin.islog==false){
         return (
@@ -99,14 +106,14 @@ const ModalExamples = () =>{
                 </div>    
                 <p className="login-email">Email</p>
                 <div className="login-title-center">
-                    <input className="login-email-input" id="emailLogin"></input>
+                    <input className="login-email-input" name="emailLogin" value={formLogin.emailLogin} onChange={(e)=>handleChangeLogin(e)}></input>
                 </div>
                 <p className="login-password">Password</p>
                 <div className="login-title-center">
-                    <input type="password" className="login-password-input" id="passwordLogin"></input>
+                    <input type="password" className="login-password-input" name="passwordLogin" value={formLogin.passwordLogin} onChange={(e)=>handleChangeLogin(e)}></input>
                 </div>
                 <div className="login-title-center">
-                    <button className="login-buttons" onClick={logins}>Login</button>
+                    <button className="login-buttons" onClick={logins} >Login</button>
                 </div>
                 <div className="login-title-center">
                     <p className="login-register">Don't have an account ? click Here</p>
@@ -122,19 +129,27 @@ const ModalExamples = () =>{
                 </div>    
                 <p className="login-email">Fullname</p>
                 <div className="login-title-center">
-                    <input className="login-email-input" id="username"></input>
+                    <input className="login-email-input" name="fullname" value={form.fullname} onChange={(e)=>handleChange(e)}></input>
                 </div>
                 <p className="login-password">Email</p>
                 <div className="login-title-center">
-                    <input className="login-password-input" id="email"></input>
+                    <input className="login-password-input" name="email"value={form.email} onChange={(e)=>handleChange(e)}></input>
                 </div>
                 <p className="login-password">Password</p>
                 <div className="login-title-center">
-                    <input type="password" className="login-password-input" id="password"></input>
+                    <input type="password" className="login-password-input" name="password" value={form.password} onChange={(e)=>handleChange(e)}></input>
                 </div>
                 <p className="login-password">Phone</p>
                 <div className="login-title-center">
-                    <input className="login-password-input" id="phone"></input>
+                    <input className="login-password-input" name="phone" value={form.phone} onChange={(e)=>handleChange(e)}></input>
+                </div>
+                <p className="login-password">Address</p>
+                <div className="login-title-center">
+                    <input className="login-password-input" name="address" value={form.address} onChange={(e)=>handleChange(e)}></input>
+                </div>
+                <p className="login-password">Status</p>
+                <div className="login-title-center">
+                    <input className="login-password-input" name="status" value={form.status} onChange={(e)=>handleChange(e)}></input>
                 </div>
                 <div className="login-title-center">
                     <button className="login-buttons" onClick={push}>Register</button>

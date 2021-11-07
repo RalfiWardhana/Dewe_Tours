@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react';
+import React, { useState,useContext,useEffect } from 'react';
 import Navbar from "../components/navbar";
 import "../styles/detailTour.css"
 import { Container, Row, Col } from 'reactstrap';
@@ -7,13 +7,17 @@ import { useHistory } from 'react-router';
 import {useParams} from "react-router-dom";
 import DataTrip from "../detailTrip.json";
 import Context, { CartContext } from '../cartContext';
+import { API,setAuthToken } from "../config/api";
 
 
 function Detail() {
     const history = useHistory();
     const params = useParams()
     const {isLogin, setLogin} = useContext(CartContext);
-
+    console.log(isLogin)
+    const emailStay = isLogin.email
+   
+    
     const[count, setCount] = useState(0)
     const plus = () => {
         setCount(count+1)
@@ -23,49 +27,86 @@ function Detail() {
         setCount(count-1)
         }
     }
-
+      const[trip,setTrip] =useState([])
     
-      const Change = ()=>{
+      const getTrip = async() => {
+          try {
+              const token = localStorage.getItem("token");
+              setAuthToken(token)
+              const response = await API.get("/trip/"+params.id)
+              console.log(response.data.data[0].image[0])
+              setTrip(response.data.data)
+          } catch (error) {
+              console.log(error)
+          }
+      }
+      useEffect(()=>{
+          getTrip()
+      },[])
+      console.log(trip)
+      
+      const arrayUser = []
+      const Change = async ()=>{
         if(isLogin.islog == false ){
             history.push("/")
         } 
         else{ 
-            let users = JSON.parse(localStorage.getItem("users"));
-            users.forEach((usr)=>{
-                if(isLogin.email == usr.email){
-                    usr.trip.push({
-                        title : DataTrip[params.id-1].title,
-                        location : DataTrip[params.id-1].location,
-                        qty: count,
-                        price: parseInt(DataTrip[params.id-1].price) * count,
-                    })
-                    localStorage.setItem("users",JSON.stringify(users))           
+            try{
+                const token = localStorage.getItem("token");
+                setAuthToken(token)
+                const config ={
+                    headers:{
+                        "Content-Type" : "application/json"
+                    }
                 }
-            })
-            history.push("/payments")
+                const payment= { 
+                        counterQty : count,
+                        total: trip[0].price*count ,
+                        status: "Waiting payment",
+                        attachment:"",
+                        idTrip:params.id 
+                }     
+                const body = JSON.stringify(payment)
+            
+                const response = await API.post("/transaction",body,config)
+                const users = await API.get("/users")
+
+                for(let i = 0 ; i < users.data.data.length ; i++){
+                    if(users.data.data[i].email == isLogin.email){
+                        arrayUser.push(users.data.data[i])
+                    }
+                }
+               
+                setLogin({islog:true, email:emailStay, idTrip:params.id ,idTransaction:response.data.data.id, qty:count, total:trip[0].price*count, name:arrayUser[0].fullname, phone:arrayUser[0].phone, isadmin:false})
+                if(response.status == 200){
+                    history.push("/payments")
+                    console.log(isLogin)
+                }
+            }catch(error){
+                console.log(error)
+                }
           }
       }
-   
-
 
   return (
     <div>
       <Navbar/>
       <div className="body-detail">
+      {trip.map((trp)=>(
             <Container>
                   <Row>
-                      <Col><h2 className="title">{DataTrip[params.id-1].title}</h2></Col>
+                      <Col><h2 className="title">{trp.title}</h2></Col>
                   </Row>
                   <Row>
-                      <Col><p className="location-detail">{DataTrip[params.id-1].location}</p></Col>
+                      <Col><p className="location-detail">{trp.country.name}</p></Col>
                   </Row>
                   <Row style={{marginBottom:"50px"}}>
-                      <Col><img src={`/${DataTrip[params.id-1].imageOne}`} width="98%" height="400px"></img></Col>
+                      <Col><img src={trp.image[3]} width="98%" height="400px"></img></Col>
                   </Row>
                   <Row>
-                      <Col><img src="/aus1.png"></img></Col>
-                      <Col><img src="/aus2.png"></img></Col>
-                      <Col><img src="/aus3.png"></img></Col>
+                      <Col><img src={trp.image[0]}></img></Col>
+                      <Col><img src={trp.image[1]}></img></Col>
+                      <Col><img src={trp.image[2]}></img></Col>
                   </Row>
                   <Row>
                       <Col><p className="info-trip">Information Trip</p></Col>
@@ -81,13 +122,13 @@ function Detail() {
                       <Col>
                           <div className="jcc">
                               <div><img src="/hotel.PNG" height="70%" ></img></div>
-                              <div><p className="details-list">Hotel 4 Night</p></div>
+                              <div><p className="details-list">{trp.accomodation}</p></div>
                           </div>
                       </Col>
                       <Col>
                           <div className="jcc">
                               <div><img src="/aeroplane.PNG" height="70%" ></img></div>
-                              <div><p className="details-list">Qatar Airways</p></div>
+                              <div><p className="details-list">{trp.transportation}</p></div>
                           </div>
                       </Col>
                       <Col>
@@ -99,13 +140,13 @@ function Detail() {
                       <Col>
                           <div className="jcc">
                               <div><img src="/clock.PNG" height="70%"></img></div>
-                              <div><p className="details-list">6 Days 4 Night</p></div>
+                              <div><p className="details-list">{trp.day} Days {trp.night} Night</p></div>
                           </div>
                       </Col>
                       <Col>
                           <div className="jcc">
                               <div><img src="/date.PNG" height="70%"></img></div>
-                              <div><p className="details-list">26 August 2020</p></div>
+                              <div><p className="details-list">{trp.dateTrip}</p></div>
                           </div>
                       </Col>      
                   </Row>
@@ -117,7 +158,7 @@ function Detail() {
                   </Row>
                   <div className="flex-detail">
                       <Row style={{width:"365px"}}>
-                          <Col className="price-detail">IDR {DataTrip[params.id-1].price}</Col><Col className="person-detail">/Person</Col>
+                          <Col className="price-detail">IDR {trp.price}</Col><Col className="person-detail">/Person</Col>
                       </Row>
                       <Row>
                           <Col><img src="/positif.PNG" onClick={plus}></img></Col><Col className="person-detail">{count}</Col><Col><img src="/negatif.PNG" onClick={minus}></img></Col>
@@ -128,13 +169,14 @@ function Detail() {
                           <Col className="person-detail">Total :</Col>
                       </Row>
                       <Row>
-                          <Col className="price-detail">IDR { parseInt(DataTrip[params.id-1].price) * count}</Col>
+                          <Col className="price-detail">IDR { trp.price * count}</Col>
                       </Row>
                   </div>
                   <div className="flex-end">
                       <button className="button-book" onClick={Change}>Book Now</button>
                   </div>
             </Container>
+      ))}
     </div>   
       <Footer/>
 </div>
