@@ -1,6 +1,6 @@
 .square-profile{
     width: 785px;
-    height: 453px;
+    padding-bottom: 10px;
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(5, 5, 5, 0.08);
     border-radius: 8px;
@@ -23,9 +23,13 @@
     font-size: 36px;
     line-height: 24px;
     color: #050505;
-    margin: 30px 30px 50px;
+    margin: 50px 30px 50px;
 }
 .flex-profile{
+    display: flex;
+    margin-bottom: 20px;
+}
+.flex-profile-end{
     display: flex;
     margin-bottom: 20px;
 }
@@ -53,11 +57,21 @@
     margin-left: 40px; 
     margin-right: 20px;
 }
+.flex-kolom{
+    display: flex;
+    flex-direction: column;
+}
 .button-changeprofile{
     width: 280px;
     height: 50px;
     background: #FFAF00;
     border-radius: 5px;
+    padding: 12px 0px 6px 70px ;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+.filePhoto {
+    display: none;
 }
 .history-profile{
     font-family: 'Poppins', sans-serif;
@@ -67,8 +81,7 @@
     line-height: 24px;
     color: #050505;
     margin-left: 60px;
-    position: relative;
-    top: 30px;
+   margin-top: 30px;
 }
 
 .square-payment{
@@ -79,6 +92,7 @@
     box-sizing: border-box;
     border-radius: 5px;
     margin: 60px;
+    margin-top: 30px;
 }
 .flex-between-payment{
     display: flex;
@@ -140,13 +154,26 @@
     color: #000000;
     position: relative;
     left: 350px;
-    margin-right: 83px;
+    margin-right: 80px;
     z-index: 10;
+}
+.trip-payment-second{
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+    color: #000000;
+    position: relative;
+    left: 365px;
+    margin-right: 78px;
+    z-index: 11;
 }
 .desc-fill-payment{
     font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 900;
     font-size: 14px;
     line-height: 19px;
     display: flex;
@@ -159,16 +186,28 @@
 .trip-fill-payment{
     font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 900;
     font-size: 14px;
     line-height: 19px;
     display: flex;
     align-items: center;
     color: #959595;
     position: relative;
-    left: 365px;
-    margin-right: 65px;
+    left: 430px;
     z-index: 10;
+}
+.trip-fill-payment-second{
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    color: #959595;
+    position: absolute;
+    z-index: 1;
+    left: 780px; 
 }
 .desc-payment-two{
     margin-left: 40px;
@@ -177,14 +216,14 @@
 .trip-payment-two{
     font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 900;
     font-size: 18px;
     line-height: 25px;
     /* identical to box height */
     color: #000000;
     position: relative;
     left: 15px;
-    margin-right: 35px;
+    margin-right: 40px;
 }
 .trip-payment-transportation{
     font-family: 'Poppins', sans-serif;
@@ -200,7 +239,7 @@
 }
 .flex-payment-marginTop{
     display: flex;
-    margin-top: 30px;
+    margin-top: 0px;
 }
 .desc-fill-payment-two{
     font-family: 'Poppins', sans-serif;
@@ -216,15 +255,15 @@
 .trip-fill-payment-two{
     font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 900;
     font-size: 14px;
     line-height: 19px;
     display: flex;
     align-items: center;
     color: #959595;
     position: relative;
-    left: 355px;
-    margin-right: 75px;
+    left: 430px;
+    z-index: 10;
 }
 .waiting-payment{
     font-family: 'Poppins', sans-serif;
@@ -233,7 +272,16 @@
     font-size: 12px;
     line-height: 16px;  
     text-align: center;
-    color: #EC7A7A;
+    color: white;
+}
+.cancel-payment{
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 12px;
+    line-height: 16px;  
+    text-align: center;
+    color: white;
 }
 .approve-payment-button{
     background: linear-gradient(180deg, #3CF71E 0%, #0BDC5F 100%);
@@ -242,13 +290,19 @@
     padding: 5px;
 }
 .waiting-approve-buttonn{
-    background-color: #eccc86;
+    background-color: #f58d0e;
     opacity: 0.8;
     border-radius: 2px;
     padding: 5px;
 }
 .cancel-payment-button{
-    background-color: #FF0742;
+    background-color: #FF0792;
+    opacity: 0.8;
+    border-radius: 2px;
+    padding: 5px;
+}
+.waiting-payment-button{
+    background-color: #FF1619;
     opacity: 0.8;
     border-radius: 2px;
     padding: 5px;
@@ -262,7 +316,7 @@
     display: flex;
     align-items: center;
     text-align: center;
-    color: green;
+    color: white
 }
 .waiting-approve{
     font-family: 'Poppins', sans-serif;
@@ -273,12 +327,12 @@
     display: flex;
     align-items: center;
     text-align: center;
-    color: #f58d0e;
+    color: white;
 }
 .table-payment{
     font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 900;
     font-size: 18px;
     line-height: 25px;
     color: #B1B1B1;
@@ -306,4 +360,66 @@
     border-radius: 5px;
     margin-top: 0px;
     margin-bottom: 30px;
+}
+.modal-title-center{
+    display: flex;
+    justify-content: center;
+}
+.modal-buttons{
+
+    margin-bottom: 20px;
+    background: #FFAF00;
+    border-radius: 5px;
+    padding: 10px 10px 10px;
+    margin-right: 10px;
+}
+.modal-verif{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 20px ;
+}
+.modal-keterangan{
+    font-family: Product Sans;
+    font-style: normal;
+    font-size: 26px;
+    line-height: 44px;
+    color: #000000;
+}
+.flex-status{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    width: 1035px;
+    margin-left: 60px; 
+    cursor: pointer;
+}
+.flex-status-approve{
+    padding: 10px;
+    background:linear-gradient(180deg, #3CF71E 0%, #0BDC5F 100%);
+    color: white;
+    width: 255px;
+    text-align: center;
+}
+.flex-status-waiting-approve{
+    padding: 10px;
+    background-color:#f58d0e;
+    color: white;
+    width: 255px;
+    text-align: center;
+}
+.flex-status-waiting-payment{
+    padding: 10px;
+    background-color:#FF1619;
+    color: white;
+    width: 255px;
+    text-align: center;
+}
+.flex-status-cancel{
+    padding: 10px;
+    background-color:#FF0792;
+    color: white;
+    width: 255px;
+    text-align: center;
 }

@@ -15,19 +15,47 @@ function Payment() {
     const [payApprove,setApprove] = useState(false);
     const [modal, setModal] = useState(false);
     const [form, setForm] = useState(null);
-    const [transaction, setTransaction] = useState(null);
+    const [transactions, setTransactions] = useState([]);
+    const [transac, setTransac] = useState([]);
+    const [countries, setCountries] = useState([]);
     const handleChange = (e) => {
         setForm(e.target.files[0]);
     }
-
-      
      
     const closeToggle = () =>{
         setModal(!modal);
     }
-    const arrayTransaction = []
-    const pay = async() => {
+
+
+    const getTransactions = async() => {
         try {
+            const token = localStorage.getItem("token");
+            setAuthToken(token)
+            const response = await API.get("/transaction")
+            const responseCountry = await API.get("/country")  
+            setTransactions(response.data.data) 
+            setCountries(responseCountry.data.data)    
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    useEffect(()=>{
+        getTransactions()
+    },[])   
+    console.log(transactions)
+
+    const getCountry = (aidi) => {
+        for(let i = 0 ; i < countries.length ; i++){
+            if(countries[i].id == aidi){
+                return countries[i].name
+            }
+        }
+    }
+
+    const pay = async(aidi,total,price,aidiTrip) => {
+        try {
+            const token = localStorage.getItem("token");
+            setAuthToken(token)
             const config ={
                 headers:{
                     "Content-Type" : "multipart/form-data"
@@ -36,43 +64,45 @@ function Payment() {
             const formData = new FormData()
             formData.set("attachment", form);
             formData.set("status","Waiting Approve")
+            formData.set("counterQty",total/price)
+            const response = await API.patch(`/transaction/${aidi}`,formData,config)
 
-            const response = await API.patch(`/transaction/${isLogin.idTransaction}`,formData,config)
-            const applyTransaction = await API.get(`/transaction/${isLogin.idTransaction}`)
+            const applyTransaction = await API.get(`/transaction/${aidi}`)
 
-            console.log(applyTransaction.data.data[0].attachment)
-            setLogin({islog:true, email:isLogin.email, idTrip:isLogin.idTrip ,idTransaction:isLogin.idTransaction, qty:isLogin.qty, total:isLogin.total, name:isLogin.name, phone:isLogin.phone, isadmin:false, photo:applyTransaction.data.data[0].attachment})
+            const getTrip= await API.get(`/trip/${aidiTrip}`)
+
+            let startFill = parseInt(getTrip.data.data[0].filledQuota)
+            let lastFill = startFill + (total/price)
+
+            const formDatas = new FormData()
+            formDatas.set("filledQuota", lastFill);
+            const responseTrip = await API.patch(`/trip/${aidiTrip}`,formDatas,config)
+
+            setTransac(applyTransaction.data.data[0])
+            setLogin({islog:true, email:isLogin.email, idTrip:isLogin.idTrip ,idTransaction:isLogin.idTransaction, qty:isLogin.qty, total:isLogin.total, name:isLogin.name, phone:isLogin.phone, isadmin:false, photo:applyTransaction.data.data[0].attachment,isAuth:isLogin.isAuth})
             setApprove(true);
             setModal(!modal);
             
             history.push("/payments")
         } catch (error) {
             console.log(error)
-        }
-        
+        }   
     }
-
-    const[trip,setTrip] =useState([])
-      const getPay = async() => {
-          try {
-              const token = localStorage.getItem("token");
-              setAuthToken(token)
-              const response = await API.get("/trip/"+isLogin.idTrip)
-              setTrip(response.data.data)
-          } catch (error) {
-              console.log(error)
-          }
-      }
-      useEffect(()=>{
-          getPay()
-      },[])
-
+      const rupiahFormat = (value) => {
+        var	reverse = value.toString().split('').reverse().join(''),
+        ribuan 	= reverse.match(/\d{1,3}/g);
+        ribuan	= ribuan.join(',').split('').reverse().join('');
+        return ribuan
+    }
 
     if(payApprove == false){
         return (
             <div>
               <Navbar/>
               <Container>
+              {transactions.filter((statusUser)=>(statusUser.status=="Waiting payment")&&(statusUser.user.email == isLogin.email)).length == 0 ? (   
+                 <div className="square-payment"><img src="nodata.jpg" style={{marginLeft:"170px"}}></img></div>):  
+              transactions.filter((statusUser)=>(statusUser.status=="Waiting payment")&&(statusUser.user.email == isLogin.email)).reverse().map((trans)=>(
                   <Row>
                       <Col>
                           <div className="square-payment">
@@ -82,25 +112,27 @@ function Payment() {
                               </div>
                               <div className="flex-end-payment">
                                   <p className="date-payment">Saturday, 22 July 2020</p>
-                              </div>
-                              {trip.map((trp)=>(
+                              </div>      
                               <div className="flex-between-payment">
                                   <div>
                                      <div className="flex-payment">
-                                          <div className="desc-payment">{trp.title}</div>
+                                          <div className="desc-payment">{trans.trip.title}</div>
                                       </div>
                                       <div className="flex-payment">
-                                          <div className="desc-fill-payment">{trp.country.name}</div> 
+                                          <div className="desc-fill-payment">{getCountry(trans.trip.idCountry)}</div> 
                                       </div>
                                       <div className="flex-payment">
                                           <div className="trip-payment"></div>  
                                           <div className="trip-payment">Date Trip</div>
-                                          <div className="trip-payment">Duration</div>
+                                          <div className="trip-payment-second">Duration</div>
                                       </div>
                                       <div className="flex-payment">
                                           <div className="trip-fill-payment"></div>
-                                          <div className="trip-fill-payment">{trp.dateTrip}</div>
-                                          <div className="trip-fill-payment">{trp.day} Day {trp.night} Night</div>
+                                          <div className="trip-fill-payment">{trans.trip.dateTrip}</div>
+                                          <div className="trip-fill-payment-second">{trans.trip.day} Day {trans.trip.night} Night</div>
+                                      </div>
+                                      <div className="flex-payment">
+                                          <div className="desc-fill-payment-two"><div className="waiting-payment-button"><span className="waiting-payment">Waiting payment</span></div></div>
                                       </div>
                                       <div className="flex-payment-marginTop">
                                           <div className="desc-payment-two"></div>
@@ -109,37 +141,39 @@ function Payment() {
                                       </div>
                                       <div className="flex-payment">
                                           <div className="trip-fill-payment-two"></div>
-                                          <div className="trip-fill-payment-two">{trp.accomodation}</div>
-                                          <div className="trip-fill-payment-two">{trp.transportation}</div>
-                                      </div>
-                                      <div className="flex-payment">
-                                          <div className="desc-fill-payment-two"><div className="waiting-payment-button"><span className="waiting-payment">Waiting payment</span></div></div>
+                                          <div className="trip-fill-payment-two">{trans.trip.accomodation}</div>
+                                          <div className="trip-fill-payment-second">{trans.trip.transportation}</div>
                                       </div>
                                   </div>
-                                  <form><input type="file" onChange={handleChange} id="upload" name="attachment" style={{marginLeft:"80px",marginTop:"80px"}}></input></form>
+                                  <form>
+                                      <div style={{width:"170px",height:"35px", padding:"5px 5px 5px 7px", backgroundColor:"#FFAF00", marginLeft:"-220px",marginTop:"70px",borderRadius:"5px",cursor:"pointer"}}>
+                                             <label style={{color:"white",cursor:"pointer"}}>
+                                            <input type="file" onChange={handleChange} id="upload" name="attachment" style={{marginLeft:"0px",marginTop:"0px",display:"none"}}>
+                                            </input>Upload Your Payemnt
+                                            </label>
+                                      </div>
+                                </form>
                               </div>
-                               ))}
-                              {/* {arrayUser.map((usr)=>( */}
+                    
                               <Table style={{marginTop:"20px"}}>
                                   <tbody>
                                       <tr>
                                       <th>No</th>
                                       <th>Fullname</th>
-                                      <th>Gender</th>
+                                      <th>Address</th>
                                       <th>Phone</th>
                                       <th></th>
                                       <th></th>
                                       </tr>
                                   </tbody>
-                                  <tbody>
-                                  
+                                  <tbody>               
                                       <tr>
                                       <th scope="row" className="table-payment">1</th>
-                                      <td className="table-payment">{isLogin.name}</td>
-                                      <td className="table-payment">Male</td>
-                                      <td className="table-payment">{isLogin.phone}</td>
+                                      <td className="table-payment">{trans.user.fullname}</td>
+                                      <td className="table-payment">{trans.user.address}</td>
+                                      <td className="table-payment">{trans.user.phone}</td>
                                       <td className="qty">Qty</td>
-                                      <td className="qty">: {isLogin.qty}</td>
+                                      <td className="qty">: {trans.total/trans.trip.price}</td>
                                       </tr>  
                                   </tbody>
                                   <tbody>
@@ -149,19 +183,18 @@ function Payment() {
                                       <td></td>
                                       <td></td>
                                       <td className="qty">Total</td>
-                                      <td className="price-payment">: IDR {isLogin.total}</td>
+                                      <td className="price-payment">: IDR {rupiahFormat(trans.total)}</td>
                                       </tr>
                                   </tbody>
                               </Table>
-                              {/* ))} */}
                           </div>
                           <div className="flex-end-payment">
-                              <button className="payment-success" onClick={pay}>Pay</button>
-                          </div>
+                              <button className="payment-success" onClick={()=>pay(trans.id,trans.total,trans.trip.price,trans.trip.id)}>Pay</button>
+                          </div>         
                       </Col>
                   </Row>
-              </Container>
-             
+                 ))}    
+              </Container> 
               <Footer/>
             </div>
           )
@@ -184,24 +217,27 @@ function Payment() {
                               <div className="flex-end-payment">
                                   <p className="date-payment">Saturday, 22 July 2020</p>
                               </div>
-                              {trip.map((trp)=>(
+                              {/* {trip.map((trp)=>( */}
                               <div className="flex-between-payment">
                                   <div>
                                      <div className="flex-payment">
-                                          <div className="desc-payment">{trp.title}</div>
+                                          <div className="desc-payment">{transac.trip.title}</div>
                                       </div>
                                       <div className="flex-payment">
-                                          <div className="desc-fill-payment">{trp.country.name}</div> 
+                                          <div className="desc-fill-payment">{getCountry(transac.trip.idCountry)}</div> 
                                       </div>
                                       <div className="flex-payment">
                                           <div className="trip-payment"></div>  
                                           <div className="trip-payment">Date Trip</div>
-                                          <div className="trip-payment">Duration</div>
+                                          <div className="trip-payment-second">Duration</div>
                                       </div>
                                       <div className="flex-payment">
                                           <div className="trip-fill-payment"></div>
-                                          <div className="trip-fill-payment">{trp.dateTrip}</div>
-                                          <div className="trip-fill-payment">{trp.day} Day {trp.night} Night</div>
+                                          <div className="trip-fill-payment">{transac.trip.dateTrip}</div>
+                                          <div className="trip-fill-payment-second">{transac.trip.day} Day {transac.trip.night} Night</div>
+                                      </div>
+                                      <div className="flex-payment">
+                                           <div className="desc-fill-payment-two"><div className="waiting-approve-buttonss"><span className="approve-paymentss">Waiting Approve</span></div></div>
                                       </div>
                                       <div className="flex-payment-marginTop">
                                           <div className="desc-payment-two"></div>
@@ -210,24 +246,22 @@ function Payment() {
                                       </div>
                                       <div className="flex-payment">
                                           <div className="trip-fill-payment-two"></div>
-                                          <div className="trip-fill-payment-two">{trp.accomodation}</div>
-                                          <div className="trip-fill-payment-two">{trp.transportation}</div>
-                                      </div>
-                                      <div className="flex-payment">
-                                      <div className="desc-fill-payment-two"><div className="waiting-approve-buttonss"><span className="approve-paymentss">Waiting Approve</span></div></div>
-                                      </div>
+                                          <div className="trip-fill-payment-two">{transac.trip.accomodation}</div>
+                                          <div className="trip-fill-payment-second">{transac.trip.transportation}</div>
+                                      </div>      
                                   </div>
                                   <div>
                                     <img src={isLogin.photo} alt="img payment" className="bukti-payment"></img>
+                                    <p className="upload-proof">upload payment proof</p>
                                   </div>
                               </div>
-                               ))}
+                               {/* ))} */}
                               <Table style={{marginTop:"20px"}}>
                                   <tbody>
                                       <tr>
                                       <th>No</th>
                                       <th>Fullname</th>
-                                      <th>Gender</th>
+                                      <th>Address</th>
                                       <th>Phone</th>
                                       <th></th>
                                       <th></th>
@@ -237,11 +271,11 @@ function Payment() {
                                   
                                       <tr>
                                       <th scope="row" className="table-payment">1</th>
-                                      <td className="table-payment">{isLogin.name}</td>
-                                      <td className="table-payment">Male</td>
-                                      <td className="table-payment">{isLogin.phone}</td>
+                                      <td className="table-payment">{transac.user.fullname}</td>
+                                      <td className="table-payment">Bekasi Selatan</td>
+                                      <td className="table-payment">{transac.user.phone}</td>
                                       <td className="qty">Qty</td>
-                                      <td className="qty">: {isLogin.qty}</td>
+                                      <td className="qty">: {transac.counterQty}</td>
                                       </tr>  
                                   </tbody>
                                   <tbody>
@@ -251,7 +285,7 @@ function Payment() {
                                       <td></td>
                                       <td></td>
                                       <td className="qty">Total</td>
-                                      <td className="price-payment">: IDR {isLogin.total}</td>
+                                      <td className="price-payment">: IDR {rupiahFormat(transac.total)}</td>
                                       </tr>
                                   </tbody>
                               </Table>

@@ -1,5 +1,5 @@
 .data{
-    height: 1400px;
+    
     background-color: #E5E5E5;
     margin-top: -260px;
     text-align: center;
@@ -26,13 +26,14 @@
     justify-content: space-evenly;
 }
 .card-tour{
-    width: 340px;
-    height: 350px;
+    width: 370px; 
     background: #FFFFFF;
     border-radius: 5px;
     margin-bottom: 60px;
     margin-right: 20px;
     margin-left: 20px;
+    padding: 0px 20px 0px ;
+
 }
 .flex-between{
   display: flex;
@@ -42,7 +43,7 @@
 .flex-between-harga{
     display: flex;
     justify-content: space-around;  
-    margin-top: 20px;
+    margin-top: 10px;
   }
 .data-title{
     font-family: Avenir;
@@ -50,8 +51,9 @@
     font-weight: 500;
     font-size: 24px;
     margin-top: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     color: #000000;
+    text-decoration: none;
 }
 .data-price{
     font-family: Avenir;
@@ -107,4 +109,53 @@
     text-align: center;
     color: #FFFFFF;
 }
-
+.square-quota{
+    width: 62px;
+    height: 34px;
+    background: #FFFFFF;
+    border-radius: 5px 0px 0px 5px;
+    position: relative;
+    top:40px;
+    left: 270px;
+    padding:5px;
+}
+.photo-trip{
+    width: 328px;
+    height: 241px;
+}
+.full-quota{
+    width: 328px;
+    height: 241px;
+    display: flex;
+    justify-content: center;
+    background-color:gray;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 900;
+}
+.flex-data-button{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+   
+}
+.continue{
+    height: 40px;
+    width: 80px;
+    background-color: chartreuse;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.delete{
+    height: 40px;
+    width: 80px;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+}

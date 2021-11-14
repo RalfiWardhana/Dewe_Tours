@@ -68,13 +68,26 @@
     color: #000000;
     position: relative;
     left: 350px;
-    margin-right: 83px;
+    margin-right: 80px;
     z-index: 10;
+}
+.trip-payment-second{
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+    color: #000000;
+    position: relative;
+    left: 365px;
+    margin-right: 88px;
+    z-index: 11;
 }
 .desc-fill-payment{
     font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 900;
     font-size: 14px;
     line-height: 19px;
     display: flex;
@@ -87,16 +100,28 @@
 .trip-fill-payment{
     font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 900;
     font-size: 14px;
     line-height: 19px;
     display: flex;
     align-items: center;
     color: #959595;
     position: relative;
-    left: 365px;
-    margin-right: 65px;
+    left: 430px;
     z-index: 10;
+}
+.trip-fill-payment-second{
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    color: #959595;   
+    position: absolute;
+    z-index: 1;
+    left: 780px;
 }
 .desc-payment-two{
     margin-left: 40px;
@@ -105,14 +130,14 @@
 .trip-payment-two{
     font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 900;
     font-size: 18px;
     line-height: 25px;
     /* identical to box height */
     color: #000000;
     position: relative;
     left: 15px;
-    margin-right: 35px;
+    margin-right: 40px;
 }
 .trip-payment-transportation{
     font-family: 'Poppins', sans-serif;
@@ -128,7 +153,7 @@
 }
 .flex-payment-marginTop{
     display: flex;
-    margin-top: 30px;
+    margin-top: 0px;
 }
 .desc-fill-payment-two{
     font-family: 'Poppins', sans-serif;
@@ -144,15 +169,15 @@
 .trip-fill-payment-two{
     font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 900;
     font-size: 14px;
     line-height: 19px;
     display: flex;
     align-items: center;
     color: #959595;
     position: relative;
-    left: 350px;
-    margin-right: 75px;
+    left: 430px;
+    z-index: 10;
 }
 .waiting-payment{
     font-family: 'Poppins', sans-serif;
@@ -166,7 +191,7 @@
 .table-payment{
     font-family: 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 900;
     font-size: 18px;
     line-height: 25px;
     color: #B1B1B1;
@@ -224,4 +249,28 @@
     text-align: center;
     color: #000000;
 
+}
+.upload-proof{
+    font-family: Avenir;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #818181;
+    margin-left: 60px;
+}
+.trip-fill-payment-second-modal{
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    color: #959595;   
+    position: absolute;
+    z-index: 1;
+    left: 605px;
 }

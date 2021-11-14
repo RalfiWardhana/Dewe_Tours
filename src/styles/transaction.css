@@ -11,7 +11,7 @@
 .status-payment-pending{
     font-family: 'Roboto', sans-serif;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 900;
     font-size: 14px;
     line-height: 22px;
     color: #F7941E;
@@ -19,7 +19,7 @@
 .status-payment-approve{
     font-family: 'Roboto', sans-serif;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 900;
     font-size: 14px;
     line-height: 22px;
     color: #0ACF83;
@@ -27,10 +27,18 @@
 .status-payment-cancel{
     font-family: 'Roboto', sans-serif;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 900;
     font-size: 14px;
     line-height: 22px;
     color: #FF0742;
+}
+.status-payment-waiting{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    color: red;
 }
 .header-transaction{
     font-family: 'Roboto', sans-serif;
@@ -44,7 +52,7 @@
 .body-transaction{
     font-family: 'Roboto', sans-serif;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 900;
     font-size: 14px;
     line-height: 22px;
 }

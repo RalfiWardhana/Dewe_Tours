@@ -2,6 +2,8 @@
     width: 55px;
     height: 55px;
     margin-top: -60px;
+    border-radius: 100px;
+    border: 2px solid white;
 }
 .photo-logo-top-admin{
     width: 75px;
@@ -18,6 +20,7 @@
 }
 .logo-dropdown{
     margin-left: 25px;
+   
 }
 .desc-dropdown{
     font-family: Product Sans;
@@ -28,9 +31,10 @@
     color: #000000;
     margin-left: 10px;
     cursor: pointer;
+    text-decoration: none;
 }
 .dropdown-toggle{
     background-color:white;
     position: relative;
-    opacity: 0.1;
+    opacity: 0;
 }

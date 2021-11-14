@@ -29,7 +29,6 @@ const ModalExamples = () =>{
         password:"",
         phone:"",
         address:"",
-        status:""
        })
       const handleChange = (e) => {
         setForm({...form,[e.target.name]:e.target.value})
@@ -51,22 +50,32 @@ const ModalExamples = () =>{
                     "Content-Type" : "application/json"
                 }
             }
-            const body = JSON.stringify(formLogin)
-            console.log(body)
-            const response = await API.post("/login",body,config)
-            console.log(response)
-            if(response.data.status == "success"){
-                if(response.data.data.status == "user"){
-                    setLogin({islog:true,email:formLogin.emailLogin,isadmin:false});
-                    localStorage.setItem("token",response.data.data.token)
-                    history.push("/")
+            if((formLogin.emailLogin == "") && (formLogin.passwordLogin == "")){
+                history.push("/")
+                toggle()
+            }
+            else{
+                const body = JSON.stringify(formLogin)
+                console.log(body)
+                const response = await API.post("/login",body,config)
+                console.log(response)
+                if(response.data.status == "success"){
+                    if(response.data.data.status == "user"){
+                        localStorage.setItem("email",formLogin.emailLogin)
+                        localStorage.setItem("token",response.data.data.token)
+                        setLogin({islog:true,email:localStorage.getItem('email'),isadmin:false,isAuth:localStorage.getItem('token') ? true : false});
+                        history.push("/")
+                    }
+                    else if(response.data.data.status == "admin"){
+                        localStorage.setItem("email",formLogin.emailLogin)
+                        localStorage.setItem("token",response.data.data.token)
+                        localStorage.setItem("isAdmin",response.data.data.status)
+                        setLogin({islog:true,email:localStorage.getItem('email'),isadmin:true,isAuth:localStorage.getItem('token') ? true : false});
+                        history.push("/transactions")
+                        console.log(isLogin)
+                    }
+                
                 }
-                else if(response.data.data.status == "admin"){
-                    setLogin({islog:true,email:formLogin.emailLogin,isadmin:true});
-                    localStorage.setItem("token",response.data.data.token)
-                    history.push("/transactions")
-                }
-               
             }
         }catch(error){
             console.log(error)
@@ -81,22 +90,32 @@ const ModalExamples = () =>{
                     "Content-Type" : "application/json"
                 }
             }
-            const body = JSON.stringify(form)
-            console.log(config)
-            const response = await API.post("/register",body,config)
-            console.log(response)
-            if(response.data.status == "success"){
+            if((form.email == "") && (form.password == "") && (form.phone == "") && (form.address == "") && (form.fullname=="")){
                 history.push("/")
-                setModals(!modals)
+                toggles()
+            }
+            else{
+                const body = JSON.stringify(form)
+                console.log(config)
+                const response = await API.post("/register",body,config)
+                console.log(response)
+                if(response.data.status == "success"){
+                    history.push("/")
+                    setModals(!modals)
+                }
             }
         }catch(error){
             console.log(error)
             }
         
         }   
+
+        const register = () => {
+             toggles()
+        }
     
 
-    if(isLogin.islog==false){
+    if(isLogin.isAuth==false){
         return (
             <>
                <button className="login" onClick={toggle}>Login</button>   
@@ -116,7 +135,7 @@ const ModalExamples = () =>{
                     <button className="login-buttons" onClick={logins} >Login</button>
                 </div>
                 <div className="login-title-center">
-                    <p className="login-register">Don't have an account ? click Here</p>
+                    <p className="login-register">Don't have an account ? <span style={{cursor:"pointer"}} onClick={()=>register()}>click Here</span></p>
                 </div>          
                 </Modal>
                
@@ -147,10 +166,6 @@ const ModalExamples = () =>{
                 <div className="login-title-center">
                     <input className="login-password-input" name="address" value={form.address} onChange={(e)=>handleChange(e)}></input>
                 </div>
-                <p className="login-password">Status</p>
-                <div className="login-title-center">
-                    <input className="login-password-input" name="status" value={form.status} onChange={(e)=>handleChange(e)}></input>
-                </div>
                 <div className="login-title-center">
                     <button className="login-buttons" onClick={push}>Register</button>
                 </div>
@@ -160,7 +175,7 @@ const ModalExamples = () =>{
         )
     }
 
-        else if(isLogin.islog==true){
+        else if(isLogin.isAuth==true){
             return(
                 <>
                 <PhotoProfile/>
@@ -172,3 +187,8 @@ const ModalExamples = () =>{
 }
 
 export default ModalExamples;
+
+export const isAdmin = () => {
+    if (localStorage.getItem('isAdmin')) return true;
+    return false;
+}

@@ -19,23 +19,33 @@ function Detail() {
    
     
     const[count, setCount] = useState(0)
-    const plus = () => {
-        setCount(count+1)
+    const plus = (quot,fill) => {
+        let sisa = quot - fill
+        if(count < sisa){
+            setCount(count+1)
+        }
+        else{
+            setCount(count)
+        }
+       
     }
     const minus = () => {
         if(count >0){
         setCount(count-1)
         }
     }
+  
       const[trip,setTrip] =useState([])
+      const [messages, setMessage] = useState([]); 
     
       const getTrip = async() => {
           try {
               const token = localStorage.getItem("token");
               setAuthToken(token)
               const response = await API.get("/trip/"+params.id)
-              console.log(response.data.data[0].image[0])
+              const responseTransaction = await API.get("/transaction")
               setTrip(response.data.data)
+              setMessage(responseTransaction.data.data)
           } catch (error) {
               console.log(error)
           }
@@ -47,7 +57,7 @@ function Detail() {
       
       const arrayUser = []
       const Change = async ()=>{
-        if(isLogin.islog == false ){
+        if(isLogin.isAuth == false ){
             history.push("/")
         } 
         else{ 
@@ -60,7 +70,7 @@ function Detail() {
                     }
                 }
                 const payment= { 
-                        counterQty : count,
+                        counterQty : 0,
                         total: trip[0].price*count ,
                         status: "Waiting payment",
                         attachment:"",
@@ -77,7 +87,7 @@ function Detail() {
                     }
                 }
                
-                setLogin({islog:true, email:emailStay, idTrip:params.id ,idTransaction:response.data.data.id, qty:count, total:trip[0].price*count, name:arrayUser[0].fullname, phone:arrayUser[0].phone, isadmin:false})
+                setLogin({islog:true, email:emailStay, idTrip:params.id ,idTransaction:response.data.data.id, qty:count, total:trip[0].price*count, name:arrayUser[0].fullname, phone:arrayUser[0].phone, address:arrayUser[0].address, isadmin:false,isAuth:isLogin.isAuth})
                 if(response.status == 200){
                     history.push("/payments")
                     console.log(isLogin)
@@ -87,6 +97,13 @@ function Detail() {
                 }
           }
       }
+      const rupiahFormat = (value) => {
+        var	reverse = value.toString().split('').reverse().join(''),
+        ribuan 	= reverse.match(/\d{1,3}/g);
+        ribuan	= ribuan.join(',').split('').reverse().join('');
+        return ribuan
+    }
+  
 
   return (
     <div>
@@ -104,9 +121,9 @@ function Detail() {
                       <Col><img src={trp.image[3]} width="98%" height="400px"></img></Col>
                   </Row>
                   <Row>
-                      <Col><img src={trp.image[0]}></img></Col>
-                      <Col><img src={trp.image[1]}></img></Col>
-                      <Col><img src={trp.image[2]}></img></Col>
+                      <Col><img src={trp.image[0]} width="330px" height="170px"></img></Col>
+                      <Col><img src={trp.image[1]} width="330px" height="170px"></img></Col>
+                      <Col><img src={trp.image[2]} width="330px" height="170px"></img></Col>
                   </Row>
                   <Row>
                       <Col><p className="info-trip">Information Trip</p></Col>
@@ -134,7 +151,7 @@ function Detail() {
                       <Col>
                            <div className="jcc">   
                               <div><img src="/eats.PNG" height="70%" ></img></div>
-                              <div><p className="details-list">Included as itinerary</p></div>
+                              <div><p className="details-list">{trp.eat}</p></div>
                           </div>
                       </Col>
                       <Col>
@@ -158,10 +175,10 @@ function Detail() {
                   </Row>
                   <div className="flex-detail">
                       <Row style={{width:"365px"}}>
-                          <Col className="price-detail">IDR {trp.price}</Col><Col className="person-detail">/Person</Col>
+                          <Col className="price-detail">IDR {rupiahFormat(trp.price)}</Col><Col className="person-detail">/Person</Col>
                       </Row>
                       <Row>
-                          <Col><img src="/positif.PNG" onClick={plus}></img></Col><Col className="person-detail">{count}</Col><Col><img src="/negatif.PNG" onClick={minus}></img></Col>
+                          <Col><img src="/negatif.PNG" onClick={minus}></img></Col><Col className="person-detail">{count}</Col><Col><img src="/positif.PNG" onClick={()=>plus(trp.quota,trp.filledQuota)}></img></Col>
                       </Row>
                   </div>
                   <div className="flex-border">
@@ -169,7 +186,7 @@ function Detail() {
                           <Col className="person-detail">Total :</Col>
                       </Row>
                       <Row>
-                          <Col className="price-detail">IDR { trp.price * count}</Col>
+                          <Col className="price-detail">IDR {rupiahFormat(trp.price * count)}</Col>
                       </Row>
                   </div>
                   <div className="flex-end">

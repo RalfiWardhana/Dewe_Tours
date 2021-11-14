@@ -15,6 +15,7 @@ function Transaction(){
     const[list, setList]= useState([])
     const[detail,setDetail]=useState([])
     const[test,setTest] = useState(false)
+    const[cancel,setCancel]=useState([])
 
      const toggleList = async (aidi) => { 
         try {
@@ -49,7 +50,7 @@ function Transaction(){
         else if(status=="Waiting Approve"){
             return "status-payment-pending"
         }
-        else if((status=="Waiting Payment")||(status=="Cancel")){
+        else if((status=="Waiting payment")||(status=="Cancel")){
             return "status-payment-cancel"
         }
     }
@@ -76,7 +77,7 @@ function Transaction(){
         setModalList(!modalList); 
     }
 
-    const handleCancel = async (aidi) => {
+    const handleCancel = async (aidi,total,price,idTripp) => {
         try {
             const token = localStorage.getItem("token");
             setAuthToken(token)
@@ -87,7 +88,20 @@ function Transaction(){
             }
             const formData = new FormData()
             formData.set("status","Cancel")
+            formData.set("counterQty","0")
             const responseUpdate = await API.patch("/transaction/"+aidi,formData,config)
+            
+            const getTrip= await API.get(`/trip/${idTripp}`)
+            console.log(getTrip.data.data[0]);
+
+            let startFill = parseInt(getTrip.data.data[0].filledQuota)
+            let lastFill = startFill - (total/price)
+            console.log(lastFill)
+
+            const formDatas = new FormData()
+            formDatas.set("filledQuota", lastFill);
+            const responseTrip = await API.patch(`/trip/${idTripp}`,formDatas,config)
+            console.log(responseTrip.data.data)
 
             const response = await API.get("/transaction")
             setList(response.data.data)
@@ -107,6 +121,42 @@ function Transaction(){
     let i = 1
     console.log(list)
     console.log(detail)
+    
+    const rupiahFormat = (value) => {
+        var	reverse = value.toString().split('').reverse().join(''),
+        ribuan 	= reverse.match(/\d{1,3}/g);
+        ribuan	= ribuan.join(',').split('').reverse().join('');
+        return ribuan
+    }
+    const button = (aidi) =>{
+        if(aidi == "Approve"){
+            return "approve-payment-button"
+        }
+        else if(aidi == "Waiting Approve"){
+            return "waiting-approve-buttonn"
+        }
+        else if(aidi == "Cancel"){
+            return "cancel-payment-button"
+        }
+        else if(aidi == "Waiting payment"){
+            return "cancel-payment-button"
+        }
+    }
+    const color = (aidi) =>{
+        if(aidi == "Approve"){
+            return "approve-payment"
+        }
+        else if(aidi == "Waiting Approve"){
+            return "waiting-approve"
+        }
+        else if(aidi == "Cancel"){
+            return "waiting-payment"
+        }
+        else if(aidi == "Waiting payment"){
+            return "waiting-payment"
+        }
+    }
+
     if(test == false){
         return(
             <div>
@@ -131,7 +181,7 @@ function Transaction(){
                                         <th scope="row">{i++}</th>
                                         <td>{lst.user.fullname}</td>
                                         <td>{lst.trip.title}</td>
-                                        <td>{lst.attachment}</td>
+                                        <td><a href={lst.attachment} target="_blank">{lst.attachment}</a></td>
                                         <td className={handleStatus(lst.status)}>{lst.status}</td>
                                         <td><img src="/search.png" style={{cursor:"pointer"}} onClick={()=>toggleList(lst.id)}></img></td>
                                     </tr>
@@ -167,7 +217,7 @@ function Transaction(){
                                     <th scope="row">{i++}</th>
                                     <td>{lst.user.fullname}</td>
                                     <td>{lst.trip.title}</td>
-                                    <td>{lst.attachment}</td>
+                                    <td><a href={lst.attachment} target="_blank">{lst.attachment}</a></td>
                                     <td className={handleStatus(lst.status)}>{lst.status}</td>
                                     <td><img src="/search.png" style={{cursor:"pointer"}} onClick={()=>toggleList(lst.id)}></img></td>
                                 </tr>
@@ -195,12 +245,15 @@ function Transaction(){
                                       <div className="flex-payment">
                                           <div className="trip-payment"></div>  
                                           <div className="trip-payment">Date Trip</div>
-                                          <div className="trip-payment">Duration</div>
+                                          <div className="trip-payment-second">Duration</div>
                                       </div>
                                       <div className="flex-payment">
                                           <div className="trip-fill-payment"></div>
                                           <div className="trip-fill-payment">{dtl.trip.dateTrip}</div>
-                                          <div className="trip-fill-payment">{dtl.trip.day} Day {dtl.trip.night} Night</div>
+                                          <div className="trip-fill-payment-second-modal">{dtl.trip.day} Day {dtl.trip.night} Night</div>
+                                      </div>
+                                      <div className="flex-payment">
+                                          <div className="desc-fill-payment-two"><div className={button(dtl.status)}><span className={color(dtl.status)}>{dtl.status}</span></div></div>
                                       </div>
                                       <div className="flex-payment-marginTop">
                                           <div className="desc-payment-two"></div>
@@ -210,20 +263,23 @@ function Transaction(){
                                       <div className="flex-payment">
                                       <div className="trip-fill-payment-two"></div>
                                           <div className="trip-fill-payment-two">{dtl.trip.accomodation}</div>
-                                          <div className="trip-fill-payment-two">{dtl.trip.transportation}</div>
-                                      </div>
-                                      <div className="flex-payment">
-                                          <div className="desc-fill-payment-two"><div className="waiting-payment-button"><span className="waiting-payment">{dtl.status}</span></div></div>
+                                          <div className="trip-fill-payment-second-modal">{dtl.trip.transportation}</div>
                                       </div>
                                   </div>
-                                  <div><img src="bukti-payment.PNG" className="bukti-payment"></img></div>
+                                  {dtl.status == "Waiting payment" ? (
+                                  null
+                                  ):
+                                  <div>
+                                    <img src={dtl.attachment} className="bukti-payment"></img>
+                                    <p className="upload-proof" >upload payment proof</p>
+                                  </div>}       
                               </div>
                               <Table style={{marginTop:"20px"}}>
                                   <tbody>
                                       <tr>
                                       <th>No</th>
                                       <th>Fullname</th>
-                                      <th>Gender</th>
+                                      <th>Address</th>
                                       <th>Phone</th>
                                       <th></th>
                                       <th></th>
@@ -233,10 +289,10 @@ function Transaction(){
                                       <tr>
                                       <th scope="row" className="table-payment">1</th>
                                       <td className="table-payment">{dtl.user.fullname}</td>
-                                      <td className="table-payment">Male</td>
+                                      <td className="table-payment">{dtl.user.address}</td>
                                       <td className="table-payment">{dtl.user.phone}</td>
                                       <td className="qty">Qty</td>
-                                      <td className="qty">: {dtl.counterQty}</td>
+                                      <td className="qty">: {dtl.total/dtl.trip.price}</td>
                                       </tr>
                                   </tbody>
                                   <tbody>
@@ -246,16 +302,20 @@ function Transaction(){
                                       <td></td>
                                       <td></td>
                                       <td className="qty">Total</td>
-                                      <td className="price-payment">: IDR {dtl.total}</td>
+                                      <td className="price-payment">: IDR {rupiahFormat(dtl.total)}</td>
                                       </tr>
                                   </tbody>
                              </Table>
-                              <div className="flex-end-payment">      
-                              <div className="flex-payment">
-                                <div className="cancel-admin"><span className="isi-cancel-admin" onClick={()=>handleCancel(dtl.id)}>Cancel</span></div>      
-                                <div className="approve-admin" ><span className="isi-approve-admin" onClick={()=>handleApprove(dtl.id)}>Approve</span></div>
-                              </div>
-                            </div>
+                            
+                              <div className="flex-end-payment"> 
+                              {dtl.status == "Waiting Approve" ? (    
+                                <div className="flex-payment">
+                                <div className="cancel-admin"><span className="isi-cancel-admin" onClick={()=>handleCancel(dtl.id,dtl.total,dtl.trip.price,dtl.trip.id)}>Cancel</span></div>      
+                                  <div className="approve-admin" ><span className="isi-approve-admin" onClick={()=>handleApprove(dtl.id)}>Approve</span></div>
+                                </div>
+                                ):null}
+                             </div>
+                            
                         </Modal>  
                     ))}
                 </Container>
