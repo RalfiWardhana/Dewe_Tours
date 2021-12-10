@@ -20,16 +20,23 @@
 }
 .logo-dropdown{
     margin-left: 25px;
-   
+    width: 30px;
+    height: 30px;
+}
+.logo-dropdown-search{
+    margin-left: 25px;
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
 }
 .desc-dropdown{
     font-family: Product Sans;
     font-style: normal;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 22px;
     color: #000000;
-    margin-left: 10px;
+    margin-left: 5px;
     cursor: pointer;
     text-decoration: none;
 }

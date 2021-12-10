@@ -63,6 +63,11 @@ const Datas = () =>{
             console.log(error)
         }
      }
+     const deletee = async (aidi) => {
+        const responseDelete = await API.delete(`/trip/${aidi}`)
+        const response = await API.get("/trip")
+        setTrips(response.data.data)
+     }
  
      if(isLogin.isadmin == true){
         return (
@@ -84,6 +89,20 @@ const Datas = () =>{
                                     <p className="data-price">IDR {rupiahFormat(trip.price)}</p>
                                     <p className="data-location">{trip.country.name}</p>
                                 </div>
+                                {/* {trip.filledQuota == 0 ? (  
+                                <div className="flex-data-button">
+                                    <div className="continue" onClick={()=>edits(trip.id)}>
+                                        <span style={{color:"white"}}>
+                                            Edit
+                                        </span>
+                                    </div>
+                                    <div className="continue" onClick={()=>deletee(trip.id)}>
+                                        <span style={{color:"white"}}>
+                                            Delete
+                                        </span>
+                                    </div>
+                                </div>    
+                                ):<div style={{height:"0px"}}></div>} */}
                                 {trip.filledQuota == trip.quota ? (  
                                 <div className="flex-data-button">
                                     <div className="continue" onClick={()=>edits(trip.id)}>

@@ -135,7 +135,7 @@ const add = async(e) => {
                     <label className="label-addTrip">Image</label><br></br>
                     <input type="file" onChange={handleChange} name="image" multiple></input>
                     <div className="display-center">
-                        <button className="button-trp"><p className="isi-button-trp">Continue Trip</p></button>
+                        <button className="button-trp"><p className="isi-button-trp">Edit Trip</p></button>
                     </div>
                 </form>
             </Container>

@@ -14,12 +14,17 @@ function Payment() {
     const {isLogin, setLogin} = useContext(CartContext);
     const [payApprove,setApprove] = useState(false);
     const [modal, setModal] = useState(false);
+    const [mustPay, setMustPay] = useState(false);
     const [form, setForm] = useState(null);
     const [transactions, setTransactions] = useState([]);
     const [transac, setTransac] = useState([]);
     const [countries, setCountries] = useState([]);
     const handleChange = (e) => {
         setForm(e.target.files[0]);
+    }
+
+    const closeModal = () => {
+        setMustPay(!mustPay)
     }
      
     const closeToggle = () =>{
@@ -54,6 +59,11 @@ function Payment() {
 
     const pay = async(aidi,total,price,aidiTrip) => {
         try {
+            if(form == null){
+                setMustPay(!mustPay)
+                return
+            }
+            else{
             const token = localStorage.getItem("token");
             setAuthToken(token)
             const config ={
@@ -84,6 +94,7 @@ function Payment() {
             setModal(!modal);
             
             history.push("/payments")
+         }
         } catch (error) {
             console.log(error)
         }   
@@ -105,6 +116,9 @@ function Payment() {
               transactions.filter((statusUser)=>(statusUser.status=="Waiting payment")&&(statusUser.user.email == isLogin.email)).reverse().map((trans)=>(
                   <Row>
                       <Col>
+                          <Modal size="lg" style={{maxWidth: '800px', width: '70%'}}  isOpen={mustPay} toggle={closeModal} >
+                              <div  className="alert-upload"><p>You must upload Your payment</p></div>         
+                          </Modal>
                           <div className="square-payment">
                               <div className="flex-between-payment">
                                   <div><img src="deweTours.png" className="dewe-payment"></img></div>
@@ -204,8 +218,8 @@ function Payment() {
             <div>
               <Navbar/>
               <Container>
-                  <Modal size="lg" style={{maxWidth: '800px', width: '100%'}}  isOpen={modal}>
-                    <div onClick={closeToggle} className="alert-success-pay">Your Payment Will be Confirmed within 1 x 24 Hours To see orders just waiting</div>         
+                  <Modal size="lg" style={{maxWidth: '800px', width: '100%'}}  isOpen={modal} toggle={closeToggle}>
+                    <div className="alert-success-pay">Your Payment Will be Confirmed within 1 x 24 Hours To see orders just waiting</div>         
                   </Modal>
                   <Row>
                       <Col>

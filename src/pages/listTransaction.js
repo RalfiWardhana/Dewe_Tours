@@ -16,6 +16,7 @@ function Transaction(){
     const[detail,setDetail]=useState([])
     const[test,setTest] = useState(false)
     const[cancel,setCancel]=useState([])
+    const [countries, setCountries] = useState([]);
 
      const toggleList = async (aidi) => { 
         try {
@@ -38,7 +39,9 @@ function Transaction(){
             const token = localStorage.getItem("token");
             setAuthToken(token)
             const response = await API.get("/transaction")
-            setList(response.data.data)    
+            const responseCountry = await API.get("/country")  
+            setList(response.data.data) 
+            setCountries(responseCountry.data.data)    
         } catch (error) {
             console.log(error)
         }
@@ -156,7 +159,13 @@ function Transaction(){
             return "waiting-payment"
         }
     }
-
+    const getCountry = (aidi) => {
+        for(let i = 0 ; i < countries.length ; i++){
+            if(countries[i].id == aidi){
+                return countries[i].name
+            }
+        }
+    }
     if(test == false){
         return(
             <div>
@@ -240,7 +249,7 @@ function Transaction(){
                                           <div className="desc-payment">{dtl.trip.title}</div>
                                       </div>
                                       <div className="flex-payment">
-                                          <div className="desc-fill-payment">france</div> 
+                                          <div className="desc-fill-payment">{getCountry(dtl.trip.idCountry)}</div> 
                                       </div>
                                       <div className="flex-payment">
                                           <div className="trip-payment"></div>  

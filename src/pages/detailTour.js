@@ -181,6 +181,8 @@ function Detail() {
                           <Col><img src="/negatif.PNG" onClick={minus}></img></Col><Col className="person-detail">{count}</Col><Col><img src="/positif.PNG" onClick={()=>plus(trp.quota,trp.filledQuota)}></img></Col>
                       </Row>
                   </div>
+                  {isLogin.isadmin == false ? (  
+                  <>    
                   <div className="flex-border">
                       <Row>
                           <Col className="person-detail">Total :</Col>
@@ -190,8 +192,10 @@ function Detail() {
                       </Row>
                   </div>
                   <div className="flex-end">
-                      <button className="button-book" onClick={Change}>Book Now</button>
+                       <button className="button-book" onClick={Change}>Book Now</button>
                   </div>
+                  </>):<div style={{paddingBottom:"30px"}}></div>} 
+                  
             </Container>
       ))}
     </div>   

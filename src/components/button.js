@@ -1,5 +1,5 @@
 import React, { useState,useContext } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Alert } from 'reactstrap';
 import "./button.css";
 import { useHistory } from 'react-router';
 import PhotoProfile from "./photoProfile"
@@ -16,6 +16,9 @@ const ModalExamples = () =>{
       const [modals, setModals] = useState(false);
     
       const toggles = () => setModals(!modals);
+
+      const [alert, setAlert] = useState(false)
+      const [alerts, setAlerts] = useState(false)
       const login = false
 
       const history = useHistory();
@@ -58,7 +61,7 @@ const ModalExamples = () =>{
                 const body = JSON.stringify(formLogin)
                 console.log(body)
                 const response = await API.post("/login",body,config)
-                console.log(response)
+                console.log(response.status)
                 if(response.data.status == "success"){
                     if(response.data.data.status == "user"){
                         localStorage.setItem("email",formLogin.emailLogin)
@@ -78,6 +81,7 @@ const ModalExamples = () =>{
                 }
             }
         }catch(error){
+            setAlert(true)
             console.log(error)
             }
         
@@ -94,6 +98,9 @@ const ModalExamples = () =>{
                 history.push("/")
                 toggles()
             }
+            else if((form.email == "") || (form.password == "") || (form.phone == "") || (form.address == "") || (form.fullname=="")){
+                setAlerts(true)
+            }
             else{
                 const body = JSON.stringify(form)
                 console.log(config)
@@ -102,6 +109,9 @@ const ModalExamples = () =>{
                 if(response.data.status == "success"){
                     history.push("/")
                     setModals(!modals)
+                }
+                else if( response.status == 400){
+                    setAlert(!alert)
                 }
             }
         }catch(error){
@@ -119,10 +129,15 @@ const ModalExamples = () =>{
         return (
             <>
                <button className="login" onClick={toggle}>Login</button>   
-                <Modal isOpen={modal}  className="modal-login">
+                <Modal isOpen={modal}  className="modal-login">  
                 <div className="login-title-center">
                     <div className="login-title">Login</div>
-                </div>    
+                </div> 
+                <div className="alert">
+                    <Alert color="danger" isOpen={alert}>
+                            Your account is invalid !!
+                    </Alert>
+                </div>
                 <p className="login-email">Email</p>
                 <div className="login-title-center">
                     <input className="login-email-input" name="emailLogin" value={formLogin.emailLogin} onChange={(e)=>handleChangeLogin(e)}></input>
@@ -145,6 +160,11 @@ const ModalExamples = () =>{
                <Modal isOpen={modals}  className="modal-login">
                 <div className="login-title-center">
                     <div className="login-title">Register</div>
+                </div>
+                <div className="alert">
+                    <Alert color="danger" isOpen={alerts}>
+                            Your registration must be complete !!
+                    </Alert>
                 </div>    
                 <p className="login-email">Fullname</p>
                 <div className="login-title-center">

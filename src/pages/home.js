@@ -82,7 +82,9 @@ function Home() {
                         {trip.filledQuota == trip.quota ? (  
                         <div className="full-quota">Full Quota</div>
                         ):<img src={trip.image[3]} className="photo-trip"></img>}
-                        <h4 className="data-title"><Link to={`/detail/${trip.id}`} className="data-title">{trip.title}</Link></h4>
+                        {trip.filledQuota == trip.quota ? (  
+                        <h4 className="data-title">{trip.title}</h4>
+                        ):<h4 className="data-title"><Link to={`/detail/${trip.id}`} className="data-title">{trip.title}</Link></h4>} 
                           <div className="flex-between-harga">
                             <p className="data-price">IDR {rupiahFormat(trip.price)}</p>
                             <p className="data-location">{trip.country.name}</p>

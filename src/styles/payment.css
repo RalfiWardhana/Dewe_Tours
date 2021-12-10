@@ -250,6 +250,19 @@
     color: #000000;
 
 }
+.alert-upload{
+    margin: 30px auto 20px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 33px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+
+}
 .upload-proof{
     font-family: Avenir;
     font-size: 13px;

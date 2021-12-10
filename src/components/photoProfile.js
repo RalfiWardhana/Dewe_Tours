@@ -21,10 +21,12 @@ const LogoProfile = () =>{
           console.log("pppp")
           history.push("/")
       }
-      
+    
+    const [dropdownNotif, setDropdownNotif] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
    const toggle = () => setDropdownOpen(prevState => !prevState);
+   const toggleNotif = () => setDropdownNotif(prevState => !prevState);
 
    const getHistory = async() => {
         try {
@@ -70,7 +72,7 @@ const LogoProfile = () =>{
     }
     else if(isLogin.isadmin == true){
         return (
-            <>
+            <div>
                 <Dropdown isOpen={dropdownOpen} toggle={toggle} className="dropdown-profile"> 
                         <DropdownToggle caret className="dropdown-toggle"> 
                         </DropdownToggle>   
@@ -87,7 +89,7 @@ const LogoProfile = () =>{
                             </div>
                         </DropdownMenu>
                     </Dropdown>
-            </>
+            </div>
         )
     }
 

@@ -40,7 +40,7 @@
     width: 60px;
     height: 29px;
     margin-left: 42px;
-    margin-top: 70px;
+    margin-top: 20px;
     font-family: Product Sans;
     font-style: normal;
     font-weight: bold;
@@ -96,4 +96,9 @@
     font-size: 18px;
     line-height: 25px;
     color: #B1B1B1;
+}
+.alert{
+    position: relative;
+    z-index: 10;
+    top: 25px;
 }
