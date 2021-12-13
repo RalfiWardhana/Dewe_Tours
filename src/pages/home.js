@@ -1,11 +1,6 @@
 import React,{useContext, useEffect, useState} from "react";
 import "../components/jumbotron.css"
 import Background from "../background.png"
-import Logo from "../components/logo"
-import Button from "../components/button"
-import Cards from "../components/cards";
-import Data from "../components/data";
-import Footer from "../components/footer";
 import "../components/data.css";
 import { useHistory } from 'react-router';
 import { API,setAuthToken } from "../config/api";
@@ -36,8 +31,6 @@ function Home() {
             const response = await API.get("/trip")
             const responseTransaction = await API.get("/transaction")
             setTrips(response.data.data)
-            console.log(response.data.data)
-            console.log(responseTransaction.data.data)
             setMessage(responseTransaction.data.data)
         } catch (error) {
             console.log(error)
