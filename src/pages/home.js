@@ -1,6 +1,7 @@
 import React,{useContext, useEffect, useState} from "react";
 import "../components/jumbotron.css"
 import "../components/data.css";
+import Cards from "../components/cards";
 import Background from "../background.png"
 import { useHistory } from 'react-router';
 import { API,setAuthToken } from "../config/api";
